@@ -300,17 +300,6 @@ function getCube(num) {
  */
 function getFibonacciNumber(/* index */) {
   throw new Error('Not implemented');
-  // if (index === 0) {
-  //   return 0;
-  // }
-  // let first = 1;
-  // let second = 1;
-  // for (let i = 3; i <= index; i + 1) {
-  //   const c = first + second;
-  //   first = second;
-  //   second = c;
-  // }
-  // return second;
 }
 
 /**
@@ -340,8 +329,13 @@ function getSumToN(n) {
  *   202 => 4  // (2+0+2)
  *   5   => 5  // 5
  */
-function getSumOfDigits(/* num */) {
-  throw new Error('Not implemented');
+function getSumOfDigits(num) {
+  let sum = 0;
+  // eslint-disable-next-line no-param-reassign
+  for (; num > 0; num = Math.floor(num / 10)) {
+    sum += num % 10;
+  }
+  return sum;
 }
 
 /**
@@ -671,12 +665,12 @@ function getHypotenuse(a, b) {
  */
 function getCountOfOddNumbers(number) {
   let countofOdd = 0;
-  for (let i = 0; i <= number; i += 1) {
-    if (i % 2 === 0) {
+  for (let i = 0; i <= Math.abs(number); i += 1) {
+    if (i % 2 !== 0) {
       countofOdd += 1;
     }
   }
-  return countofOdd;  
+  return countofOdd;
 }
 
 module.exports = {
