@@ -115,17 +115,9 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  const mult = x1 * y1 + x2 * y2;
-  let result;
-  if (mult === 0) {
-    result = 0;
-    return result;
-  }
-  const moduleA = Math.sqrt(x1 ** 2 + y1 ** 2);
-  const moduleB = Math.sqrt(x2 ** 2 + y2 ** 2);
-  const resultDeg = (mult / moduleA) * moduleB;
-  result = (resultDeg * Math.PI) / 180;
-  return result;
+  const scalMult = Math.imul(x1, x2) + Math.imul(y1, y2);
+  const cosAngle = scalMult / (Math.hypot(x1, y1) * Math.hypot(x2, y2));
+  return Math.acos(cosAngle);
 }
 
 /**
@@ -222,8 +214,16 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  if (n < 2) return false;
-  for (let i = n - 1; i > 1; i - 1) {
+  if (n <= 1) {
+    return false;
+  }
+  if (n === 2) {
+    return true;
+  }
+  if (n % 2 === 0) {
+    return false;
+  }
+  for (let i = 3; i <= Math.sqrt(n); i += 2) {
     if (n % i === 0) {
       return false;
     }
